@@ -38,4 +38,29 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    implementation project(path:':domain')
+
+    //Koin
+    def koin_version = "3.2.2"
+    implementation "io.insert-koin:koin-core:$koin_version"
+
+    //Coroutines
+    def coroutinesVersion =
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    //Retrofit
+    def retrofitVersion = "2.9.0"
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    //OkHttp
+    def okHttpVersion = "4.10.0"
+    api "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    //Moshi
+    def moshiVersion = "1.13.0"
+    api "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    api "com.squareup.moshi:moshi-kotlin:$moshiVersion"
 }
