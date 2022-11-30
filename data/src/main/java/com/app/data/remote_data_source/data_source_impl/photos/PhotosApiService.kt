@@ -1,13 +1,13 @@
 package com.app.data.remote_data_source.data_source_impl.photos
 
 import com.app.data.remote_data_source.data_source_impl.photos.models.PhotosSearchResponse
-import com.app.data.remote_data_source.utils.ApiConst
+import com.app.data.remote_data_source.network.ApiConst
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface PhotosApiService {
     @GET("/services/rest${ApiConst.PHOTO_SEARCH_METHOD}${ApiConst.API_BODY}")
-    fun getPhotoSearch(
+    suspend fun getPhotoSearch(
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 100,
         @Query("text") query: String,
