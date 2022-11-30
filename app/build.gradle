@@ -63,8 +63,11 @@ dependencies {
 
     //Koin
     def koin_version = "3.2.2"
-    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 }

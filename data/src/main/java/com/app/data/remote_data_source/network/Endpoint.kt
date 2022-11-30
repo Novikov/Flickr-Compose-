@@ -1,4 +1,4 @@
-package com.app.data.remote_data_source.utils
+package com.app.data.remote_data_source.network
 
 import java.net.URI
 
