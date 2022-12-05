@@ -62,15 +62,27 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
     //Koin
-    def koin_version = "3.2.2"
+    def koin_version = "3.3.0"
     implementation "io.insert-koin:koin-android:$koin_version"
+
+    //Compose additional
+    def koin_android_compose_version = "3.3.0"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_android_compose_version"
+
+    //Compose live data extensions
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_ui_version"
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 
     //Compose navigation
     def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    //Coil
+    def coil_version = "2.2.2"
+    implementation "io.coil-kt:coil-compose:$coil_version"
 
     implementation project(path: ':domain')
     implementation project(path: ':data')
