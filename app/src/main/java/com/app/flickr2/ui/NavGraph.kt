@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.app.flickr2.ui.detail.Detail
 import com.app.flickr2.ui.home.Home
 import com.app.flickr2.ui.login.Login
 
@@ -16,6 +17,9 @@ fun Navigation() {
         }
         composable(route = Screen.HomeScreen.route) {
             Home { navController.navigate(Screen.DetailScreen.route) }
+        }
+        composable(route = Screen.DetailScreen.route) {
+            Detail { }
         }
     }
 }
