@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.app.flickr2.ui.detail.Detail
 import com.app.flickr2.ui.home.Home
 import com.app.flickr2.ui.login.Login
+import com.app.flickr2.ui.search.Search
 
 @Composable
 fun Navigation() {
@@ -16,10 +17,16 @@ fun Navigation() {
             Login { navController.navigate(Screen.HomeScreen.route) }
         }
         composable(route = Screen.HomeScreen.route) {
-            Home { navController.navigate(Screen.DetailScreen.route) }
+            Home(
+                detailButtonOnClick = { navController.navigate(Screen.DetailScreen.route) },
+                searchButtonOnClick = { navController.navigate(Screen.SearchScreen.route) }
+            )
         }
         composable(route = Screen.DetailScreen.route) {
-            Detail { }
+            Detail()
+        }
+        composable(route = Screen.SearchScreen.route) {
+            Search(toDetailButtonOnClick = { navController.navigate(Screen.DetailScreen.route) })
         }
     }
 }

@@ -1,9 +1,6 @@
 package com.app.flickr2.ui.home
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +11,11 @@ import androidx.compose.ui.unit.dp
 import com.app.flickr2.ui.theme.Flickr2Theme
 
 @Composable
-fun Home(modifier: Modifier = Modifier, loginOnClick: () -> Unit) {
+fun Home(
+    modifier: Modifier = Modifier,
+    detailButtonOnClick: () -> Unit,
+    searchButtonOnClick: () -> Unit
+) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -23,9 +24,18 @@ fun Home(modifier: Modifier = Modifier, loginOnClick: () -> Unit) {
         Text("Home screen")
         Button(
             modifier = Modifier.padding(vertical = 24.dp),
-            onClick = { loginOnClick.invoke() }
+            onClick = { detailButtonOnClick.invoke() }
         ) {
             Text(text = "to Detail")
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Button(
+            modifier = Modifier.padding(vertical = 24.dp),
+            onClick = { searchButtonOnClick.invoke() }
+        ) {
+            Text(text = "to Search")
         }
     }
 }
@@ -34,6 +44,6 @@ fun Home(modifier: Modifier = Modifier, loginOnClick: () -> Unit) {
 @Composable
 private fun FeaturedCoursePreview() {
     Flickr2Theme {
-        Home() {}
+        Home(Modifier, {}, {})
     }
 }
