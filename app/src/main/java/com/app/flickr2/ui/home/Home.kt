@@ -1,11 +1,13 @@
 package com.app.flickr2.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -20,29 +22,46 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun Home(
     modifier: Modifier = Modifier,
-    homeViewModel: HomeViewModel = koinViewModel()
+    homeViewModel: HomeViewModel = koinViewModel(),
+    onItemClick: () -> Unit
 ) {
     Column(
         modifier = modifier.fillMaxSize()
     ) {
         val viewState = homeViewModel.photosLiveData.observeAsState()
-        viewState.value?.let { PhotoList(list = it) }
-    }
-}
-
-@Composable
-fun PhotoList(list: List<PhotoDataUI>) { // todo think about keys
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
-    ) {
-        items(items = list, key = { photo -> photo.photoId }) { photo ->
-            PhotoItem(photoDataUI = photo)
+        viewState.value?.let {
+            PhotoList(
+                list = it,
+                modifier = modifier,
+                onItemClick = onItemClick
+            )
         }
     }
 }
 
 @Composable
-fun PhotoItem(photoDataUI: PhotoDataUI) {
+fun PhotoList(
+    list: List<PhotoDataUI>,
+    modifier: Modifier,
+    onItemClick: () -> Unit = {}
+) { // todo think about keys
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp)
+    ) {
+        items(items = list, key = { photo -> photo.photoId }) { photo ->
+            Surface(
+                modifier = Modifier.clickable {
+                    onItemClick.invoke()
+                }
+            ) {
+                PhotoItem(photoDataUI = photo, modifier = modifier)
+            }
+        }
+    }
+}
+
+@Composable
+fun PhotoItem(photoDataUI: PhotoDataUI, modifier: Modifier) {
     val photoUrl = PhotoUrlBuilder.buildPhotoUrl(
         photoDataUI.serverId,
         photoDataUI.photoId,
@@ -59,6 +78,6 @@ fun PhotoItem(photoDataUI: PhotoDataUI) {
 @Composable
 private fun FeaturedCoursePreview() {
     Flickr2Theme {
-        Home()
+        Home(onItemClick = {})
     }
 }

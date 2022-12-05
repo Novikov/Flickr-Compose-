@@ -17,7 +17,7 @@ fun Navigation() {
             Login { navController.navigate(Screen.HomeScreen.route) }
         }
         composable(route = Screen.HomeScreen.route) {
-            Home()
+            Home(onItemClick = { navController.navigate(Screen.DetailScreen.route) })
         }
         composable(route = Screen.DetailScreen.route) {
             Detail()
