@@ -3,6 +3,7 @@ package com.app.flickr2.ui.home
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -11,6 +12,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -26,7 +28,7 @@ fun Home(
     onItemClick: () -> Unit
 ) {
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize().padding(0.5.dp)
     ) {
         val viewState = homeViewModel.photosLiveData.observeAsState()
         viewState.value?.let {
@@ -46,13 +48,13 @@ fun PhotoList(
     onItemClick: () -> Unit = {}
 ) { // todo think about keys
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
+        columns = GridCells.Fixed(3)
     ) {
         items(items = list, key = { photo -> photo.photoId }) { photo ->
             Surface(
                 modifier = Modifier.clickable {
                     onItemClick.invoke()
-                }
+                }.padding(1.dp)
             ) {
                 PhotoItem(photoDataUI = photo, modifier = modifier)
             }
@@ -70,9 +72,10 @@ fun PhotoItem(photoDataUI: PhotoDataUI, modifier: Modifier) {
     AsyncImage(
         model = photoUrl,
         contentDescription = "",
-        modifier = Modifier.sizeIn(minHeight = 140.dp, minWidth = 140.dp)
+        modifier = modifier.sizeIn(minHeight = 140.dp, minWidth = 140.dp),
+        contentScale = ContentScale.Crop
     )
-} // todo implement onclick
+}
 
 @Preview(name = "Featured Course")
 @Composable
