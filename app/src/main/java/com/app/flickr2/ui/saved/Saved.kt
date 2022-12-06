@@ -1,4 +1,4 @@
-package com.app.flickr2.ui.search
+package com.app.flickr2.ui.saved
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,13 +16,13 @@ import androidx.compose.ui.unit.dp
 import com.app.flickr2.ui.theme.Flickr2Theme
 
 @Composable
-fun Search(modifier: Modifier = Modifier, toDetailButtonOnClick: () -> Unit) {
+fun Saved(modifier: Modifier = Modifier, toDetailButtonOnClick: () -> Unit) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Search screen")
+        Text("Saved screen")
         Button(
             modifier = Modifier.padding(vertical = 24.dp),
             onClick = { toDetailButtonOnClick.invoke() },
@@ -37,6 +37,6 @@ fun Search(modifier: Modifier = Modifier, toDetailButtonOnClick: () -> Unit) {
 @Composable
 private fun FeaturedCoursePreview() {
     Flickr2Theme {
-        Search() {}
+        Saved() {}
     }
 }

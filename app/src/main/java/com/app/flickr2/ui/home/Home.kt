@@ -26,7 +26,9 @@ import org.koin.androidx.compose.koinViewModel
 fun Home(
     modifier: Modifier = Modifier,
     homeViewModel: HomeViewModel = koinViewModel(),
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
+    onSearchIconClick: () -> Unit,
+    onSavedIconClick: () -> Unit
 ) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Color.White) {
@@ -46,7 +48,7 @@ fun Home(
                 modifier = Modifier.padding(start = 8.dp)
             )
             Spacer(Modifier.weight(1f, true))
-            IconButton(onClick = { }) {
+            IconButton(onClick = onSearchIconClick) {
                 val painter = painterResource(id = R.drawable.ic_search)
                 Icon(
                     painter = painter,
@@ -55,7 +57,7 @@ fun Home(
                     tint = Color.Black
                 )
             }
-            IconButton(onClick = { }) {
+            IconButton(onClick = onSavedIconClick) {
                 val painter = painterResource(id = R.drawable.ic_save)
                 Icon(
                     painter = painter,
@@ -129,6 +131,10 @@ fun PhotoItem(photoDataUI: PhotoDataUI, modifier: Modifier) {
 @Composable
 private fun FeaturedCoursePreview() {
     Flickr2Theme {
-        Home(onItemClick = {})
+        Home(
+            onItemClick = {},
+            onSearchIconClick = {},
+            onSavedIconClick = {}
+        )
     }
 }
