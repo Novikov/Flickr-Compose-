@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.app.flickr2.ui.detail.Detail
 import com.app.flickr2.ui.home.Home
 import com.app.flickr2.ui.login.Login
+import com.app.flickr2.ui.saved.Saved
 import com.app.flickr2.ui.search.Search
 
 @Composable
@@ -18,8 +19,9 @@ fun Navigation() {
         }
         composable(route = Screen.HomeScreen.route) {
             Home(
-                detailButtonOnClick = { navController.navigate(Screen.DetailScreen.route) },
-                searchButtonOnClick = { navController.navigate(Screen.SearchScreen.route) }
+                onItemClick = { navController.navigate(Screen.DetailScreen.route) },
+                onSearchIconClick = { navController.navigate(Screen.SearchScreen.route) },
+                onSavedIconClick = { navController.navigate(Screen.SavedScreen.route) }
             )
         }
         composable(route = Screen.DetailScreen.route) {
@@ -27,6 +29,9 @@ fun Navigation() {
         }
         composable(route = Screen.SearchScreen.route) {
             Search(toDetailButtonOnClick = { navController.navigate(Screen.DetailScreen.route) })
+        }
+        composable(route = Screen.SavedScreen.route) {
+            Saved(toDetailButtonOnClick = { navController.navigate(Screen.DetailScreen.route) })
         }
     }
 }
