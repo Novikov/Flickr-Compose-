@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.app.flickr2'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.app.flickr2"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -71,6 +71,9 @@ dependencies {
 
     //Compose live data extensions
     implementation "androidx.compose.runtime:runtime-livedata:$compose_ui_version"
+
+    //Compose accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
