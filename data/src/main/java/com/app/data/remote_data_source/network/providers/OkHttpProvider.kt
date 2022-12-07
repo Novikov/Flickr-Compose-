@@ -12,10 +12,9 @@ fun provideOkHttpProvider(
     .readTimeout(TIMEOUT_TIME_IN_SECOND, TimeUnit.SECONDS)
     .connectTimeout(TIMEOUT_TIME_IN_SECOND, TimeUnit.SECONDS)
     .addInterceptor(httpLoggingInterceptor)
-//    .addInterceptor(errorInterceptor)
     .build()
 
-// Todo Add error interceptor
+// TODO Improve error logging
 
 fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -27,9 +26,3 @@ fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         }
     return httpLoggingInterceptor
 }
-
-fun provideOkHttpProviderForRefresh(
-    httpLoggingInterceptor: HttpLoggingInterceptor
-): OkHttpClient = OkHttpClient.Builder()
-    .addInterceptor(httpLoggingInterceptor)
-    .build()

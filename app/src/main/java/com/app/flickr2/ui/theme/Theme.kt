@@ -30,6 +30,8 @@ private val LightColorPalette = lightColors(
     */
 )
 
+// TODO: Use color from theme in all app
+
 @Composable
 fun Flickr2Theme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
