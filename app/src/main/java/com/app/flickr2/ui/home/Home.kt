@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -68,12 +69,11 @@ fun Home(
             }
         }
     }) {
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(0.5.dp)
+        val viewState = homeViewModel.photosLiveData.observeAsState()
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
         ) {
-            val viewState = homeViewModel.photosLiveData.observeAsState()
             viewState.value?.let {
                 PhotoList(
                     list = it,
@@ -81,6 +81,7 @@ fun Home(
                     onItemClick = onItemClick
                 )
             }
+            Loader(modifier = modifier, isDisplayed = viewState.value.isNullOrEmpty())
         }
     }
 }
@@ -88,6 +89,17 @@ fun Home(
 // TODO: Align menu button and app name
 
 // TODO: change dp to grids in all app
+
+@Composable
+fun Loader(modifier: Modifier, isDisplayed: Boolean) {
+    if (isDisplayed) {
+        CircularProgressIndicator(
+            modifier = modifier.size(90.dp),
+            color = Color.Black,
+            strokeWidth = 6.dp
+        )
+    }
+}
 
 @Composable
 fun PhotoList(
@@ -131,10 +143,10 @@ fun PhotoItem(photoDataUI: PhotoDataUI, modifier: Modifier) {
 @Composable
 private fun FeaturedCoursePreview() {
     Flickr2Theme {
-        Home(
-            onItemClick = {},
-            onSearchIconClick = {},
-            onSavedIconClick = {}
+        CircularProgressIndicator(
+            modifier = Modifier.size(100.dp),
+            color = Color.Green,
+            strokeWidth = 10.dp
         )
     }
 }
